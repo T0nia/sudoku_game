@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+    height: 100%; /* Ensure the body takes up the full height */
+    margin: 0;    /* Remove default margin */
+    background-color: #7A4D9C; /* Light purple background */
+    display: flex; /* Use flexbox to stretch content */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+  }
