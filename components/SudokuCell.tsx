@@ -14,7 +14,7 @@ const SudokuCell: React.FC<SudokuCellProps> = ({ value, onChange }) => {
       max="9"
       value={value ?? ''}
       onChange={(e) => onChange(e.target.value ? parseInt(e.target.value) : null)}
-      className="w-12 h-12 text-center border border-gray-300 rounded"
+      className="w-12 h-12 text-center"
     />
   );
 };

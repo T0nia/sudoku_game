@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    height: 100%; /* Ensure the body takes up the full height */
-    margin: 0;    /* Remove default margin */
-    background-color: #7A4D9C; /* Light purple background */
-    display: flex; /* Use flexbox to stretch content */
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-  }
+html,
+body {
+  @apply h-full m-0 bg-gray-700; 
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
