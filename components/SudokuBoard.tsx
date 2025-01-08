@@ -1,9 +1,10 @@
-"use client"; 
-
+"use client";
 import React, { useState } from 'react';
 import Button from './Button';
 import { solveSudoku } from '../utils/solveSudoku';
-import { isValidSudoku, isValidMove } from '../utils/validateSudoku';
+import { isValidSudoku } from '../utils/validateSudoku';
+import { generateRandomSudoku } from '../utils/generateSudoku'; 
+import { resetBoard } from '../utils/resetBoard'; 
 
 const initialBoard: (number | null)[][] = [
   [5, 3, null, null, 7, null, null, null, null],
@@ -18,11 +19,18 @@ const initialBoard: (number | null)[][] = [
 ];
 
 const SudokuBoard: React.FC = () => {
-  const [board, setBoard] = useState(initialBoard);
+  const [board, setBoard] = useState(generateRandomSudoku()); 
 
-  // Reset the board to the initial state
+  // Generate a random new puzzle
+  const handleStart = () => {
+    const newBoard = generateRandomSudoku();
+    setBoard(newBoard);
+  };
+
+  // Reset the board using the external reset function
   const handleReset = () => {
-    setBoard(initialBoard);
+    const resetGameBoard = resetBoard(); 
+    setBoard(resetGameBoard); 
   };
 
   // Solve the Sudoku puzzle
@@ -31,27 +39,21 @@ const SudokuBoard: React.FC = () => {
     setBoard(solvedBoard ? [...board] : [...board]); // Update the board
   };
 
-  // Validate the Sudoku board
+  // Validate the Sudoku board (Check button logic)
   const handleValidate = () => {
-    const valid = isValidSudoku(board);
-    alert(valid ? 'Puzzle is valid!' : 'Puzzle is invalid!');
-  };
-
-  // Handle check button (check if the board has invalid or empty cells)
-  const handleCheck = () => {
-    const invalidCells: { row: number; col: number }[] = [];
-
-    for (let row = 0; row < 9; row++) {
-      for (let col = 0; col < 9; col++) {
-        // Check if the cell is empty or contains an invalid value
-        if (board[row][col] === null || !isValidMove(board, row, col, board[row][col]!)) {
-          invalidCells.push({ row, col });
-        }
-      }
+    // Check if the board is in its default state
+    if (JSON.stringify(board) === JSON.stringify(initialBoard)) {
+      alert('Give it a try');
+      return;
     }
 
-    // Highlight invalid cells (for example, change their background color)
-    console.log(invalidCells); // Here you could set a state to highlight invalid cells
+    // Check if the puzzle is solved
+    const solvedBoard = solveSudoku([...board]);
+    if (solvedBoard) {
+      alert('Great! Puzzle solved');
+    } else {
+      alert('Puzzle not solved');
+    }
   };
 
   // Handle changes in cell values
@@ -66,11 +68,7 @@ const SudokuBoard: React.FC = () => {
       <div className="grid grid-cols-9 gap-1">
         {board.map((row, rowIndex) =>
           row.map((value, colIndex) => {
-            // Determine background color based on the row and column indices
-            const isEvenRow = rowIndex % 2 === 0;
-            const isEvenCol = colIndex % 2 === 0;
-            const isLightGrey = (isEvenRow && !isEvenCol) || (!isEvenRow && isEvenCol);
-
+            const isLightGrey = (rowIndex + colIndex) % 2 === 1;
             return (
               <div
                 key={`${rowIndex}-${colIndex}`}
@@ -90,18 +88,10 @@ const SudokuBoard: React.FC = () => {
         )}
       </div>
       <div className="flex space-x-4 mt-4">
-        <div>
-          <Button onClick={handleReset} label="Reset" />
-        </div>
-        <div>
-          <Button onClick={handleValidate} label="Validate" />
-        </div>
-        <div>
-          <Button onClick={handleSolve} label="Solve" />
-        </div>
-        <div>
-          <Button onClick={handleCheck} label="Check" />
-        </div>
+        <Button onClick={handleStart} label="Start" />
+        <Button onClick={handleValidate} label="Check" />
+        <Button onClick={handleSolve} label="Solve" />
+        <Button onClick={handleReset} label="Reset" />
       </div>
     </div>
   );
