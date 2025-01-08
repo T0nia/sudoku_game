@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import { solveSudoku } from '../utils/solveSudoku';
+// import { isValidSudoku } from '../utils/validateSudoku';
 import { generateRandomSudoku } from '../utils/generateSudoku'; 
 import { resetBoard } from '../utils/resetBoard'; 
 
