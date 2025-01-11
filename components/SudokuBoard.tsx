@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import Button from './Button';
 import { solveSudoku } from '../utils/solveSudoku';
-// import { isValidSudoku } from '../utils/validateSudoku';
 import { generateRandomSudoku } from '../utils/generateSudoku'; 
 import { resetBoard } from '../utils/resetBoard'; 
 
@@ -31,12 +30,6 @@ const SudokuBoard: React.FC = () => {
   const handleReset = () => {
     const resetGameBoard = resetBoard(); 
     setBoard(resetGameBoard); 
-  };
-
-  // Solve the Sudoku puzzle
-  const handleSolve = () => {
-    const solvedBoard = solveSudoku([...board]); // Solve the puzzle
-    setBoard(solvedBoard ? [...board] : [...board]); // Update the board
   };
 
   // Validate the Sudoku board (Check button logic)
@@ -90,7 +83,7 @@ const SudokuBoard: React.FC = () => {
       <div className="flex space-x-4 mt-4">
         <Button onClick={handleStart} label="Start" />
         <Button onClick={handleValidate} label="Check" />
-        <Button onClick={handleSolve} label="Solve" />
+        {/* <Button onClick={handleSolve} label="Solve" /> */}
         <Button onClick={handleReset} label="Reset" />
       </div>
     </div>
