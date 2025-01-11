@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 import Button from './Button';
-import { solveSudoku } from '../utils/solveSudoku';
+import { solveSudoku } from '../utils/solveSudoku'; // Import solveSudoku
 import { generateRandomSudoku } from '../utils/generateSudoku'; 
-import { resetBoard } from '../utils/resetBoard'; 
+import { resetBoard } from '../utils/resetBoard';
 
+// Initial board setup (for validation)
 const initialBoard: (number | null)[][] = [
   [5, 3, null, null, 7, null, null, null, null],
   [6, null, null, 1, 9, 5, null, null, null],
@@ -41,7 +42,7 @@ const SudokuBoard: React.FC = () => {
     }
 
     // Check if the puzzle is solved
-    const solvedBoard = solveSudoku([...board]);
+    const solvedBoard = solveSudoku([...board]);  // Now works after import
     if (solvedBoard) {
       alert('Great! Puzzle solved');
     } else {
@@ -83,7 +84,6 @@ const SudokuBoard: React.FC = () => {
       <div className="flex space-x-4 mt-4">
         <Button onClick={handleStart} label="Start" />
         <Button onClick={handleValidate} label="Check" />
-        {/* <Button onClick={handleSolve} label="Solve" /> */}
         <Button onClick={handleReset} label="Reset" />
       </div>
     </div>
