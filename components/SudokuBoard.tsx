@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from 'react';
 import Button from './Button';
-import { solveSudoku } from '../utils/solveSudoku'; // Import solveSudoku
+import { solveSudoku } from '../utils/solveSudoku'; 
 import { generateRandomSudoku } from '../utils/generateSudoku'; 
 import { resetBoard } from '../utils/resetBoard';
-import { initialBoard } from '../utils/initialBoard'; // Import initialBoard
+import { initialBoard } from '../utils/initialBoard';
 
 const SudokuBoard: React.FC = () => {
   const [board, setBoard] = useState(generateRandomSudoku()); 
@@ -30,7 +30,7 @@ const SudokuBoard: React.FC = () => {
     }
 
     // Check if the puzzle is solved
-    const solvedBoard = solveSudoku([...board]);  // Now works after import
+    const solvedBoard = solveSudoku([...board]);  
     if (solvedBoard) {
       alert('Great! Puzzle solved');
     } else {

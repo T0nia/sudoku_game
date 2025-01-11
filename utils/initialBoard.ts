@@ -1,4 +1,4 @@
-// utils/initialBoard.ts
+
 
 export const initialBoard: (number | null)[][] = [
     [5, 3, null, null, 7, null, null, null, null],

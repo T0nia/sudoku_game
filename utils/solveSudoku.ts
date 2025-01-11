@@ -1,4 +1,4 @@
-// utils/solveSudoku.ts
+
 
 export const solveSudoku = (board: (number | null)[][]): boolean => {
     for (let row = 0; row < 9; row++) {
